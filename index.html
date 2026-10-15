@@ -50,6 +50,7 @@
     background: #fff;
   }
   input[type="search"] { flex: 1; min-width: 180px; }
+  mark.hl { background: #ffe08a; color: inherit; padding: 0 2px; border-radius: 2px; }
   main { max-width: 880px; margin: 0 auto; padding: 16px; }
   #almar-note {
     background: var(--warn-bg);
@@ -232,14 +233,52 @@ function renderContacts() {
   renderSections();
 }
 
+function resetHighlights() {
+  document.querySelectorAll("#sections mark.hl").forEach(m => {
+    const parent = m.parentNode;
+    parent.replaceChild(document.createTextNode(m.textContent), m);
+    parent.normalize();
+  });
+}
+
+function highlightInSection(sec, q) {
+  const ql = q.toLowerCase();
+  const walker = document.createTreeWalker(sec, NodeFilter.SHOW_TEXT, {
+    acceptNode: n => (!n.nodeValue.trim() || n.parentElement.closest("script,style")) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+  });
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(node => {
+    const text = node.nodeValue;
+    const lower = text.toLowerCase();
+    if (lower.indexOf(ql) === -1) return;
+    const frag = document.createDocumentFragment();
+    let pos = 0, idx = lower.indexOf(ql);
+    while (idx !== -1) {
+      if (idx > pos) frag.appendChild(document.createTextNode(text.slice(pos, idx)));
+      const mark = document.createElement("mark");
+      mark.className = "hl";
+      mark.textContent = text.slice(idx, idx + q.length);
+      frag.appendChild(mark);
+      pos = idx + q.length;
+      idx = lower.indexOf(ql, pos);
+    }
+    if (pos < text.length) frag.appendChild(document.createTextNode(text.slice(pos)));
+    node.parentNode.replaceChild(frag, node);
+  });
+}
+
 function applySearch() {
   const q = document.getElementById("search").value.trim();
+  resetHighlights();
   const hasMore = q.length > 0;
+  const ql = q.toLowerCase();
   let visible = 0;
   document.querySelectorAll("#sections section").forEach(sec => {
-    if (!hasMore || sec.textContent.toLowerCase().includes(q.toLowerCase())) {
+    if (!hasMore || sec.textContent.toLowerCase().includes(ql)) {
       sec.classList.remove("hidden");
       visible++;
+      if (hasMore) highlightInSection(sec, q);
     } else {
       sec.classList.add("hidden");
     }
