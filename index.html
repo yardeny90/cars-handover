@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תיק חפיפה - קצין רכב</title>
+<style>
+  :root {
+    --primary: #1e3a5f;
+    --accent: #2d6a4f;
+    --bg: #f5f6f8;
+    --card: #ffffff;
+    --warn-bg: #fff8e6;
+    --warn-border: #e0a800;
+    --contact-bg: #e8f4f0;
+    --contact-border: #2d6a4f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg);
+    color: #222;
+    margin: 0;
+    line-height: 1.6;
+  }
+  header {
+    background: var(--primary);
+    color: #fff;
+    padding: 18px 16px 14px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+  header h1 { margin: 0 0 4px; font-size: 1.35rem; }
+  header .sub { font-size: 0.85rem; opacity: 0.85; }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: center;
+  }
+  .controls label { font-size: 0.9rem; }
+  select, input[type="search"] {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+    background: #fff;
+  }
+  input[type="search"] { flex: 1; min-width: 180px; }
+  main { max-width: 880px; margin: 0 auto; padding: 16px; }
+  #almar-note {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    display: none;
+  }
+  section {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+  section h2 {
+    margin: 0 0 2px;
+    font-size: 1.15rem;
+    color: var(--primary);
+  }
+  .tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    background: #e3ecf5;
+    color: var(--primary);
+    border-radius: 999px;
+    padding: 2px 10px;
+    margin-bottom: 10px;
+  }
+  section h4 { margin: 16px 0 6px; color: var(--primary); }
+  ol, ul { padding-inline-start: 22px; margin: 8px 0; }
+  li { margin: 4px 0; }
+  a { color: var(--accent); font-weight: 600; }
+  .warn {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 10px 0;
+    font-size: 0.93rem;
+  }
+  .contacts-box {
+    background: var(--contact-bg);
+    border: 1px solid var(--contact-border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin: 12px 0;
+  }
+  .contacts-box h4 { margin: 0 0 6px; color: var(--contact-border); }
+  .contact-card { padding: 6px 0; border-bottom: 1px dashed #b9d6c9; }
+  .contact-card:last-child { border-bottom: none; }
+  .contact-name { font-weight: 700; }
+  .contact-role { font-size: 0.88rem; color: #444; }
+  .contact-phone { font-size: 0.9rem; }
+  .garage-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .garage-table th, .garage-table td {
+    border: 1px solid #d5dbe1;
+    padding: 7px 10px;
+    text-align: right;
+    font-size: 0.92rem;
+  }
+  .garage-table th { background: #e3ecf5; }
+  .no-results { display: none; text-align: center; color: #777; padding: 30px 0; }
+  footer { text-align: center; font-size: 0.8rem; color: #888; padding: 10px 0 30px; }
+  .hidden { display: none !important; }
+  .top-link {
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>תיק חפיפה - קצין רכב</h1>
+  <div class="sub">נהלים כלליים לכל קציני הרכב + אנשי קשר לפי האלמ"ר שלך</div>
+  <div class="controls">
+    <label for="almar">האלמ"ר שלי:</label>
+    <select id="almar"><option value="">-- בחר אלמ"ר --</option></select>
+    <input type="search" id="search" placeholder="חיפוש בכל התוכן... (למשל: אוריאה, תאונה, Goodi)">
+  </div>
+</header>
+
+<main>
+  <div id="almar-note">
+    ⚠️ <strong>בחר את האלמ"ר שלך למעלה</strong> כדי לראות בכל נושא את אנשי הקשר הרלוונטיים עבורך. בלי בחירה, פרטי אנשי הקשר לא יוצגו.
+  </div>
+  <div id="sections"></div>
+  <div class="no-results" id="no-results">לא נמצאו תוצאות לחיפוש.</div>
+</main>
+
+<footer>
+  תיק חפיפה לקצין רכב · מתוחזק על ידי קציני הרכב · אנשי הקשר מנוהלים בקובץ contacts.json
+</footer>
+
+<script src="content.js"></script>
+<script>
+let CONTACTS = null;
+let CURRENT_ALMAR = localStorage.getItem("almar") || "";
+
+function loadContacts() {
+  return fetch("contacts.json")
+    .then(r => r.json())
+    .catch(() => null);
+}
+
+function almarSelectorInit(almars) {
+  const sel = document.getElementById("almar");
+  almars.forEach(a => {
+    const opt = document.createElement("option");
+    opt.value = a; opt.textContent = a;
+    sel.appendChild(opt);
+  });
+  if (CURRENT_ALMAR && almars.includes(CURRENT_ALMAR)) sel.value = CURRENT_ALMAR;
+  sel.addEventListener("change", () => {
+    CURRENT_ALMAR = sel.value;
+    localStorage.setItem("almar", CURRENT_ALMAR);
+    renderContacts();
+    updateAlmarNote();
+  });
+}
+
+function updateAlmarNote() {
+  document.getElementById("almar-note").style.display = CURRENT_ALMAR ? "none" : "block";
+}
+
+function contactBox(topicId) {
+  if (!CONTACTS || !topicId) return "";
+  const topic = CONTACTS.topics[topicId];
+  if (!topic) return "";
+  const almarContacts = (CURRENT_ALMAR && topic.contacts[CURRENT_ALMAR]) || [];
+  let inner;
+  if (!CURRENT_ALMAR) {
+    inner = '<div style="font-size:0.9rem">בחר אלמ"ר למעלה כדי לראות את איש הקשר לנושא זה.</div>';
+  } else if (almarContacts.length === 0) {
+    inner = '<div style="font-size:0.9rem">לא רשום איש קשר לנושא זה עבור האלמ"ר שנבחר. עדכן את contacts.json.</div>';
+  } else {
+    inner = almarContacts.map(c =>
+      '<div class="contact-card">' +
+      '<span class="contact-name">' + c.name + '</span> ' +
+      (c.phone ? '<span class="contact-phone">📞 ' + c.phone + '</span>' : '') +
+      (c.role ? '<div class="contact-role">' + c.role + '</div>' : '') +
+      '</div>').join("");
+  }
+  return '<div class="contacts-box"><h4>אנשי קשר: ' + topic.label + (CURRENT_ALMAR ? ' (' + CURRENT_ALMAR + ')' : '') + '</h4>' + inner + '</div>';
+}
+
+function garagesHtml() {
+  if (!CONTACTS || !CONTACTS.garages) return "<p>רשימת המוסכים תתעדכן בקרוב בקובץ contacts.json.</p>";
+  const rows = Object.keys(CONTACTS.garages)
+    .filter(k => k !== "_comment")
+    .map(vtype => {
+      const areas = CONTACTS.garages[vtype];
+      const areaHtml = Object.keys(areas).map(area => area + ": " + areas[area]).join("<br>");
+      return "<tr><td><strong>" + vtype + "</strong></td><td>" + areaHtml + "</td></tr>";
+    }).join("");
+  return '<table class="garage-table"><tr><th>סוג רכב</th><th>אזור ומוסך</th></tr>' + rows + "</table>";
+}
+
+function renderSections() {
+  const wrap = document.getElementById("sections");
+  wrap.innerHTML = SECTIONS.map((s, i) => {
+    const contactHtml = s.isGarages ? "" : (s.contacts ? contactBox(s.contacts) : "");
+    return '<section id="sec-' + s.id + '" data-index="' + i + '">' +
+      '<h2><a class="anchor" href="#sec-' + s.id + '">' + s.title + '</a></h2>' +
+      '<span class="tag">' + s.tag + '</span>' +
+      contactHtml +
+      s.html.replace('<div id="garages-list"></div>', garagesHtml()) +
+      '<a class="top-link" href="#top">⬆ חזרה למעלה</a>' +
+      '</section>';
+  }).join("");
+  applySearch();
+}
+
+function renderContacts() {
+  // מרנדר מחדש את התוכן כדי לעדכן תיבות אנשי קשר + מוסכים
+  renderSections();
+}
+
+function applySearch() {
+  const q = document.getElementById("search").value.trim();
+  const hasMore = q.length > 0;
+  let visible = 0;
+  document.querySelectorAll("#sections section").forEach(sec => {
+    if (!hasMore || sec.textContent.toLowerCase().includes(q.toLowerCase())) {
+      sec.classList.remove("hidden");
+      visible++;
+    } else {
+      sec.classList.add("hidden");
+    }
+  });
+  document.getElementById("no-results").style.display = (hasMore && visible === 0) ? "block" : "none";
+}
+
+document.getElementById("search").addEventListener("input", applySearch);
+
+loadContacts().then(data => {
+  CONTACTS = data;
+  if (CONTACTS && CONTACTS.almars) almarSelectorInit(CONTACTS.almars);
+  renderSections();
+  updateAlmarNote();
+});
+</script>
+</body>
+</html>
