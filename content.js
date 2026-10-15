@@ -192,7 +192,7 @@ const SECTIONS = [
     title: "תאונה של רכב צבאי - טופס דיווח/תיקון תאונה",
     tag: "כללי",
     html: `
-      <p>מילוי הטופס המקוון (לכל הצבא):
+      <p>מילוי הטופס המקוון:
       <a href="https://forms.office.com/pages/responsepage.aspx?id=UgiCePpVC0WQjUXA2RHna3Ss1FWcjdxJi0gH02QOA9JURjEyMDhGWEJYNTBLRUFDMjNYRTQ1MTZUWiQlQCN0PWcu&route=shorturl" target="_blank">טופס בקשה לדיווח/תיקון תאונה חדש (Microsoft Forms)</a></p>
       <div class="warn"><strong>חשוב:</strong> הטופס אינו מיועד לרכבי יר"ם או רכבי ליסינג צבאי (עליהם קיים נוהל נפרד - ראו "תאונה של רכב יר"ם").</div>
       <h4>מסמכים נדרשים לצירוף</h4>
