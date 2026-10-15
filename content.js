@@ -55,7 +55,7 @@ const SECTIONS = [
       <h4>ערוצים נוספים של סמכות הרישוי</h4>
       <ul>
         <li>מוקד טלפוני: <strong>03-512-6400</strong></li>
-        <li>דוא"ל אורחי: 033307133@idf.il</li>
+        <li>דוא"ל אורחי: <code dir="ltr" style="unicode-bidi:isolate">033307133@idf.il</code></li>
       </ul>`
   },
   {
