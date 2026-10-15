@@ -236,6 +236,7 @@ const SECTIONS = [
         <li>פעולות שננקטו</li>
       </ul>
       <div class="red-alert">דו"ח התאונות חייב להיות חתום על ידי סא"ל תוך 72 שעות מרגע התאונה!</div>
+      <div class="warn"><strong>תחקיר:</strong> על כל תאונה צריך גם להכין תחקיר ולשלוח אותו לקצין האג"ם של האלמ"ר.</div>
       <h4>נוהל הטיפול בתאונה</h4>
       <ol>
         <li>למלא דו"ח תאונות.</li>
@@ -273,6 +274,7 @@ const SECTIONS = [
         <li>פעולות שננקטו</li>
       </ul>
       <div class="red-alert">דו"ח התאונות חייב להיות חתום על ידי סא"ל תוך 72 שעות מרגע התאונה!</div>
+      <div class="warn"><strong>תחקיר:</strong> על כל תאונה צריך גם להכין תחקיר ולשלוח אותו לקצין האג"ם של האלמ"ר.</div>
       <p>מילוי הטופס המקוון:
       <a href="https://forms.office.com/pages/responsepage.aspx?id=UgiCePpVC0WQjUXA2RHna3Ss1FWcjdxJi0gH02QOA9JURjEyMDhGWEJYNTBLRUFDMjNYRTQ1MTZUWiQlQCN0PWcu&route=shorturl" target="_blank">טופס בקשה לדיווח/תיקון תאונה חדש (Microsoft Forms)</a></p>
       <div class="warn"><strong>חשוב:</strong> הטופס אינו מיועד לרכבי יר"ם או רכבי ליסינג צבאי (עליהם קיים נוהל נפרד - ראו "תאונה של רכב יר"ם").</div>
