@@ -290,7 +290,9 @@ const SECTIONS = [
       </ul>
       <h4>חברות השכרה</h4>
       <ul>
-        <li>פרי (השכרה): <strong>*975</strong></li>
+        <li>פרי (השכרה): <a href="tel:*975">📞 <strong>*975</strong></a></li>
+        <li>שלמה סיקסט: <a href="tel:*6603">📞 <strong>*6603</strong></a> או שירות לקוחות <a href="tel:+97289191400">📞 <strong>08-919-1400</strong></a></li>
+        <li>בלו סקאי: <a href="tel:*3311">📞 <strong>*3311</strong></a> או מוקד ארצי <a href="tel:+97236314444">📞 <strong>03-631-4444</strong></a></li>
         <li>חברות נוספות יתווספו כשימצאו.</li>
       </ul>`
   },
