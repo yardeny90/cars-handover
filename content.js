@@ -262,6 +262,7 @@ const SECTIONS = [
       <div class="warn"><strong>תחקיר:</strong> על כל תאונה צריך גם להכין תחקיר ולשלוח אותו לקצין האג"ם של האלמ"ר.</div>
       <p>מילוי הטופס המקוון:
       <a href="https://forms.office.com/pages/responsepage.aspx?id=UgiCePpVC0WQjUXA2RHna3Ss1FWcjdxJi0gH02QOA9JURjEyMDhGWEJYNTBLRUFDMjNYRTQ1MTZUWiQlQCN0PWcu&route=shorturl" target="_blank">טופס בקשה לדיווח/תיקון תאונה חדש (Microsoft Forms)</a></p>
+      <p>לכל שאלה בנושא דיווח התאונה והגשת הטפסים ניתן לפנות למוקד: <a href="tel:+972732432343">📞 <strong>073-243-2343</strong></a> בשלוחה 4.</p>
       <div class="warn"><strong>חשוב:</strong> הטופס אינו מיועד לרכבי יר"ם או רכבי ליסינג צבאי (עליהם קיים נוהל נפרד - ראו "תאונה של רכב יר"ם").</div>
       <h4>מסמכים נדרשים לצירוף</h4>
       <ol>
